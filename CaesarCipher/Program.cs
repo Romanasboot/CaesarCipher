@@ -8,29 +8,29 @@ namespace CaesarCipher
         {
             const string alphabet = "abcdefghijklmnopqrstuvwxyz";
 
-            static string CryptDecrypt (string text, int key)
+            static string CryptoDecrypt (string text, int key)
             {
-                string fullAlphabet = alphabet + alphabet.ToUpper();
+                string fullAlphabet = alphabet + alphabet.ToUpper(); //addind uppercase letters to fullAlphabet
                 string result = "";
 
                 for (int i = 0; i < text.Length; i++)
                 {
                     var letter = text[i];
                     var index = fullAlphabet.IndexOf(letter);
-                    if (index < 0 )
+                    if (index < 0 ) //(index not found) if no such letter in fullAlphabet then add as entered.
                     {
                         result += letter.ToString();
                     }
                     else
                     {
                         int codedIndex = (index + key);
-                        if (codedIndex > 51)
+                        if (codedIndex > 51) //checking if new index is out of fullAlphabet range and correcting.
                         {
-                            codedIndex = (index + key) - 51;
+                            codedIndex -= 51;
                         }
                         if (codedIndex <= 0)
                         {
-                            codedIndex = (index + key) + 51;
+                            codedIndex += 51;
                         }
                         result += fullAlphabet[codedIndex];
                     }
@@ -44,10 +44,10 @@ namespace CaesarCipher
                 string inputText = Console.ReadLine();
 
                 Console.WriteLine("Enter Key (1..10)\n");
-                int key = Convert.ToInt32(Console.ReadLine());
+                int key = Convert.ToInt32(Console.ReadLine()); //need validation check
 
                 Console.WriteLine("Please select: E - Encrypt, D - Decrypt.\n");
-                string select = Console.ReadLine().ToUpper();
+                string select = Console.ReadLine().ToUpper(); //need validation check
 
                 switch (select)
                 {
@@ -57,14 +57,14 @@ namespace CaesarCipher
 
                     case "E":
                         Console.WriteLine("Let's encrypt...\n");
-                        string codedText = CryptDecrypt(inputText, key);
+                        string codedText = CryptoDecrypt(inputText, key);
                         Console.WriteLine($"    Plain text: {inputText}");
                         Console.WriteLine($"Encrypted text: {codedText}\n");
                         break;
 
                     case "D":
                         Console.WriteLine("Trying to decrypt...\n");
-                        string decodedText = CryptDecrypt(inputText, -key);
+                        string decodedText = CryptoDecrypt(inputText, -key);
                         Console.WriteLine($"Encrypted text: {inputText}");
                         Console.WriteLine($"Decrypted text: {decodedText}\n");
                         break;

@@ -42,7 +42,6 @@ namespace CaesarCipher
         Start:
                 Console.WriteLine("Enter text:\n");
                 string inputText = Console.ReadLine();
-                //inputText = inputText.ToLower();
 
                 Console.WriteLine("Enter Key (1..10)\n");
                 int key = Convert.ToInt32(Console.ReadLine());
@@ -64,7 +63,7 @@ namespace CaesarCipher
                         break;
 
                     case "D":
-                        Console.WriteLine("Trying to decrypt..\n");
+                        Console.WriteLine("Trying to decrypt...\n");
                         string decodedText = CryptDecrypt(inputText, -key);
                         Console.WriteLine($"Encrypted text: {inputText}");
                         Console.WriteLine($"Decrypted text: {decodedText}\n");
@@ -73,7 +72,7 @@ namespace CaesarCipher
             Console.WriteLine("Press X to Exit or any key to Start again.\n");
             string answer = Console.ReadLine().ToUpper();
             if (answer != "X") goto Start;
-            else Console.WriteLine("Bye..");
+            else Console.WriteLine("Bye...");
         }
     }
 }

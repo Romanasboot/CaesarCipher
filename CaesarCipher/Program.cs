@@ -24,20 +24,22 @@ namespace CaesarCipher
                     else
                     {
                         int codedIndex = (index + key);
-                        if (codedIndex > 50)
+                        if (codedIndex > 51)
                         {
-                            result += fullAlphabet[codedIndex-50];
-                            return result;
+                            codedIndex = (index + key) - 51;
+                        }
+                        if (codedIndex <= 0)
+                        {
+                            codedIndex = (index + key) + 51;
                         }
                         result += fullAlphabet[codedIndex];
                     }
                 }
-                return result;
+                return result.ToString();
             }
-            
             Console.WriteLine("Hello. This is Caesar Cipher.");
 
-            Start:
+        Start:
                 Console.WriteLine("Enter text:\n");
                 string inputText = Console.ReadLine();
                 //inputText = inputText.ToLower();
@@ -56,14 +58,14 @@ namespace CaesarCipher
 
                     case "E":
                         Console.WriteLine("Let's encrypt...\n");
-                        var codedText = CryptDecrypt(inputText, key);
+                        string codedText = CryptDecrypt(inputText, key);
                         Console.WriteLine($"    Plain text: {inputText}");
                         Console.WriteLine($"Encrypted text: {codedText}\n");
                         break;
 
                     case "D":
                         Console.WriteLine("Trying to decrypt..\n");
-                        var decodedText = CryptDecrypt(inputText, -key);
+                        string decodedText = CryptDecrypt(inputText, -key);
                         Console.WriteLine($"Encrypted text: {inputText}");
                         Console.WriteLine($"Decrypted text: {decodedText}\n");
                         break;
@@ -72,8 +74,6 @@ namespace CaesarCipher
             string answer = Console.ReadLine().ToUpper();
             if (answer != "X") goto Start;
             else Console.WriteLine("Bye..");
-
-
         }
     }
 }
